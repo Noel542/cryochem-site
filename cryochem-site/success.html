@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Objednávka prijatá – CryoChem Slovakia</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f5f7fa;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+  }
+  .topbar {
+    background: #0f2d52; color: #c9d8f0;
+    font-size: 14px; padding: 8px 24px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .topbar a { color: #c9d8f0; text-decoration: none; }
+  header {
+    background: #fff; border-bottom: 2px solid #e2e8f0;
+    padding: 0 24px; height: 72px;
+    display: flex; align-items: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,.07);
+  }
+  .logo { font-size: 22px; font-weight: 800; color: #0f2d52; text-decoration: none; }
+  .logo span { color: #1565c0; }
+  main {
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    padding: 48px 24px;
+  }
+  .card {
+    background: #fff; border-radius: 18px;
+    box-shadow: 0 8px 40px rgba(0,0,0,.10);
+    padding: 52px 44px; max-width: 520px; width: 100%;
+    text-align: center;
+  }
+  .check-circle {
+    width: 88px; height: 88px;
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 28px;
+    font-size: 44px;
+  }
+  h1 { font-size: 28px; font-weight: 800; color: #0f2d52; margin-bottom: 12px; }
+  .sub { font-size: 17px; color: #64748b; line-height: 1.6; margin-bottom: 32px; }
+  .info-box {
+    background: #e8f0fe; border-radius: 12px;
+    padding: 20px 24px; margin-bottom: 32px;
+    text-align: left;
+  }
+  .info-box p { font-size: 15px; color: #1a3a5c; line-height: 1.7; }
+  .info-box strong { color: #0f2d52; }
+  .btn {
+    display: inline-block; background: #ff6b00; color: #fff;
+    text-decoration: none; border-radius: 12px;
+    padding: 15px 32px; font-size: 16px; font-weight: 700;
+    transition: background .2s;
+  }
+  .btn:hover { background: #e55f00; }
+  .contact { margin-top: 28px; font-size: 14px; color: #94a3b8; }
+  .contact a { color: #1565c0; text-decoration: none; }
+  footer {
+    background: #0f2d52; color: #6a8fb5;
+    text-align: center; padding: 20px;
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span>🇸🇰 CryoChem Slovakia s.r.o. – Poprad</span>
+  <span>📞 <a href="tel:+421911610777">+421 911 610 777</a></span>
+</div>
+
+<header>
+  <a class="logo" href="/"><span>Cryo</span>Chem Slovakia</a>
+</header>
+
+<main>
+  <div class="card">
+    <div class="check-circle">✅</div>
+    <h1>Platba prebehla úspešne!</h1>
+    <p class="sub">Ďakujeme za vašu objednávku. Dostali sme vašu platbu a už pracujeme na vybavení.</p>
+    <div class="info-box">
+      <p>📧 <strong>Potvrdenie</strong> ste dostali na váš e-mail.</p>
+      <p>📦 <strong>Doručenie:</strong> Ozveme sa vám do 24 hodín s termínom a podrobnosťami.</p>
+      <p>📞 <strong>Otázky?</strong> Zavolajte nám na <strong>+421 911 610 777</strong></p>
+    </div>
+    <a href="/" class="btn">← Späť na e-shop</a>
+    <p class="contact">
+      Máte otázku? <a href="mailto:info@cryochem.sk">info@cryochem.sk</a>
+    </p>
+  </div>
+</main>
+
+<footer>
+  © 2024 CryoChem Slovakia s.r.o. &nbsp;|&nbsp; Teplická 3984/4, 051 01 Poprad
+</footer>
+
+</body>
+</html>
