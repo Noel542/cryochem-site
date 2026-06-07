@@ -78,6 +78,14 @@
   .price-unit { font-size: 16px; font-weight: 400; color: var(--text-muted); margin-top: 4px; }
   .price-vat { font-size: 13px; color: var(--text-muted); margin-top: 8px; }
 
+  /* Quantity selector */
+  .qty-selector { display: flex; align-items: center; gap: 20px; margin-bottom: 20px; }
+  .qty-label { font-size: 16px; font-weight: 600; color: var(--blue-dark); white-space: nowrap; }
+  .qty-controls { display: flex; align-items: center; border: 2px solid var(--gray-line); border-radius: 12px; overflow: hidden; }
+  .qty-btn-lg { width: 52px; height: 52px; background: var(--gray-bg); border: none; cursor: pointer; font-size: 24px; font-weight: 700; color: var(--blue-dark); transition: background .15s; display: flex; align-items: center; justify-content: center; }
+  .qty-btn-lg:hover { background: var(--blue-light); color: var(--blue); }
+  .qty-display { min-width: 60px; text-align: center; font-size: 22px; font-weight: 800; color: var(--blue-dark); padding: 0 8px; }
+
   /* Buttons */
   .btn-add-big { width: 100%; background: var(--accent); color: #fff; border: none; border-radius: 12px; padding: 20px; font-size: 20px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: background .2s, transform .1s; margin-bottom: 14px; }
   .btn-add-big:hover { background: var(--accent-hover); transform: translateY(-2px); }
@@ -270,6 +278,13 @@ const products = [
 ];
 
 let cart = {};
+let pageQty = 1;
+
+function changePageQty(delta) {
+  pageQty = Math.max(1, pageQty + delta);
+  const el = document.getElementById('pageQtyDisplay');
+  if (el) el.textContent = pageQty;
+}
 
 /* ── localStorage ── */
 function saveCart() {
@@ -328,9 +343,17 @@ function renderProduct() {
         <div class="price-vat" style="margin-top:8px;">Cena závisí od množstva a dostupnosti. Kontaktujte nás.</div>
       </div>`;
 
-  // Action button
+  // Quantity selector + action button
   const actionBtn = p.price
-    ? `<button class="btn-add-big" id="addBtn" onclick="addToCart(${p.id})">🛒 Pridať do košíka</button>`
+    ? `<div class="qty-selector">
+        <span class="qty-label">Množstvo:</span>
+        <div class="qty-controls">
+          <button class="qty-btn-lg" onclick="changePageQty(-1)">−</button>
+          <span class="qty-display" id="pageQtyDisplay">1</span>
+          <button class="qty-btn-lg" onclick="changePageQty(1)">+</button>
+        </div>
+      </div>
+      <button class="btn-add-big" id="addBtn" onclick="addToCart(${p.id})">🛒 Pridať do košíka</button>`
     : `<a href="index.html#kontakt" class="btn-inquiry">✉️ Poslať dopyt o cene</a>`;
 
   // Info block
@@ -352,13 +375,14 @@ function renderProduct() {
 function addToCart(id) {
   const p = products.find(x => x.id === id);
   if (!p) return;
-  cart[id] = cart[id] ? { ...cart[id], qty: cart[id].qty + 1 } : { ...p, qty: 1 };
+  const qty = pageQty || 1;
+  cart[id] = cart[id] ? { ...cart[id], qty: cart[id].qty + qty } : { ...p, qty };
   saveCart();
   updateCartBadge();
 
   const btn = document.getElementById('addBtn');
   if (btn) {
-    btn.innerHTML = '✓ Pridané do košíka!';
+    btn.innerHTML = `✓ Pridané ${qty > 1 ? '(' + qty + ' ks)' : ''}!`;
     btn.classList.add('added');
     btn.disabled = true;
     setTimeout(() => {
@@ -367,7 +391,7 @@ function addToCart(id) {
       btn.disabled = false;
     }, 1800);
   }
-  showToast(`✓ ${p.name} pridaný do košíka`);
+  showToast(`✓ ${qty}× ${p.name} pridané do košíka`);
   setTimeout(() => openCart(), 600);
 }
 
