@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CryoChem Slovakia – Chladivá a Kryokvapaliny</title>
+<title>Cryochem Slovakia – Chladivá a Kryokvapaliny</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -118,6 +118,16 @@
   .usp-text h4 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
   .usp-text p  { font-size: 14px; color: var(--text-muted); }
 
+  /* ABOUT */
+  .about-card { background: var(--blue-light); border-radius: 20px; padding: 48px 52px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .about-card h2 { font-size: 30px; font-weight: 800; color: var(--blue-dark); margin-bottom: 18px; }
+  .about-card p  { font-size: 17px; color: #2a4a6a; line-height: 1.8; }
+  .about-stats { display: flex; flex-direction: column; gap: 20px; }
+  .about-stat-row { display: flex; align-items: center; gap: 20px; background: #fff; border-radius: 14px; padding: 20px 24px; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+  .about-stat-icon { font-size: 36px; }
+  .about-stat-num { font-size: 28px; font-weight: 800; color: var(--blue-dark); line-height: 1; }
+  .about-stat-lbl { font-size: 14px; color: var(--text-muted); }
+
   /* CONTACT */
   .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
   .contact-info h2 { font-size: 30px; font-weight: 800; color: var(--blue-dark); margin-bottom: 12px; }
@@ -196,6 +206,7 @@
     .contact-grid { grid-template-columns: 1fr; }
     .footer-grid  { grid-template-columns: 1fr 1fr; }
     .form-row { grid-template-columns: 1fr; }
+    .about-card { grid-template-columns: 1fr; padding: 36px 28px; }
   }
   @media (max-width: 640px) {
     .usps  { grid-template-columns: 1fr; }
@@ -210,7 +221,7 @@
 <!-- TOPBAR -->
 <div class="topbar">
   <div class="inner">
-    <span>🇸🇰 CryoChem Slovakia s.r.o. – Poprad</span>
+    <span>🇸🇰 Cryochem Slovakia s.r.o. – Poprad</span>
     <div class="contact-links">
       <span>📞 <a href="tel:+421911610777">+421 911 610 777</a></span>
       <span>✉️ <a href="mailto:info@cryochem.sk">info@cryochem.sk</a></span>
@@ -221,8 +232,9 @@
 <!-- HEADER -->
 <header>
   <div class="header-inner">
-    <a class="logo" href="#"><span>Cryo</span>Chem <span style="font-size:14px;font-weight:500;color:#64748b">Slovakia</span></a>
+    <a class="logo" href="#"><span>Cryo</span>chem <span style="font-size:14px;font-weight:500;color:#64748b">Slovakia</span></a>
     <nav>
+      <a href="#o-nas">O nás</a>
       <a href="#produkty">Produkty</a>
       <a href="#ako-objednat">Ako objednať</a>
       <a href="#kontakt">Kontakt</a>
@@ -290,7 +302,7 @@
 <section class="section bg-gray" id="produkty">
   <div class="section-inner">
     <h2 class="section-title">Naše produkty</h2>
-    <p class="section-sub">Kliknite na <strong style="color:var(--accent)">+ Do košíka</strong> pri produkte, ktorý chcete objednať</p>
+    <p class="section-sub">Kliknite na produkt pre detail, alebo priamo <strong style="color:var(--accent)">+ Do košíka</strong></p>
     <div class="tabs">
       <button class="tab-btn active" onclick="filterTab('all')">Všetky</button>
       <button class="tab-btn" onclick="filterTab('auto')">🚗 Chladivá pre autá</button>
@@ -356,8 +368,46 @@
   </div>
 </section>
 
+<!-- ABOUT US -->
+<section class="section bg-gray" id="o-nas">
+  <div class="section-inner">
+    <h2 class="section-title">O nás</h2>
+    <p class="section-sub">Spolupracujeme priamo s výrobcami – pre vás to znamená kvalitu za najlepšiu cenu</p>
+    <div class="about-card">
+      <div>
+        <h2>Cryochem Slovakia s.r.o.</h2>
+        <p>Spoločnosť Cryochem Slovakia s.r.o. ponúka svoje služby v oblasti dodávok chladív, kryokvapalín a súvisiaceho hardvéru. Spolupracujeme priamo s renomovanými výrobcami a dovozcami, čo je zárukou vysokej kvality a najlepšej odbornej a technickej podpory.</p>
+        <p style="margin-top:16px;">Sme tu pre vás od roku 2013 a za ten čas sme si vybudovali dôveru stoviek zákazníkov – od autoservisov, cez klimatizačné firmy, až po nemocnice a výskumné ústavy.</p>
+      </div>
+      <div class="about-stats">
+        <div class="about-stat-row">
+          <div class="about-stat-icon">🏆</div>
+          <div>
+            <div class="about-stat-num">15+</div>
+            <div class="about-stat-lbl">rokov na trhu</div>
+          </div>
+        </div>
+        <div class="about-stat-row">
+          <div class="about-stat-icon">❄️</div>
+          <div>
+            <div class="about-stat-num">50+</div>
+            <div class="about-stat-lbl">druhov chladív a kryokvapalín</div>
+          </div>
+        </div>
+        <div class="about-stat-row">
+          <div class="about-stat-icon">🤝</div>
+          <div>
+            <div class="about-stat-num">100%</div>
+            <div class="about-stat-lbl">odborná podpora a servis</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
-<section class="section bg-gray" id="kontakt">
+<section class="section" id="kontakt">
   <div class="section-inner">
     <div class="contact-grid">
       <div class="contact-info">
@@ -420,7 +470,7 @@
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
-      <div class="logo-f"><span>Cryo</span>Chem Slovakia</div>
+      <div class="logo-f"><span>Cryo</span>chem Slovakia</div>
       <p>Váš profesionálny dodávateľ chladív a kryokvapalín od roku 2013. Priamo od výrobcov, s odbornou podporou.</p>
       <p style="margin-top:12px; font-size:13px;">IČO: 47067268 &nbsp;|&nbsp; DIČ: 2023724087</p>
     </div>
@@ -436,46 +486,17 @@
     <div class="footer-col">
       <h4>Spoločnosť</h4>
       <ul>
-        <li><a href="#">O nás</a></li>
+        <li><a href="#o-nas">O nás</a></li>
         <li><a href="#ako-objednat">Ako objednať</a></li>
         <li><a href="#kontakt">Kontakt</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2024 CryoChem Slovakia s.r.o. Všetky práva vyhradené.</p>
+    <p>© 2026 Cryochem Slovakia s.r.o. Všetky práva vyhradené.</p>
     <p>Teplická 3984/4, 051 01 Poprad &nbsp;|&nbsp; <a href="tel:+421911610777" style="color:#6a8fb5">+421 911 610 777</a></p>
   </div>
 </footer>
-
-<!-- PRODUCT DETAIL MODAL -->
-<div class="cart-overlay" id="productModal" onclick="handleProductOverlayClick(event)">
-  <div style="background:#fff;width:700px;max-width:100vw;height:100vh;overflow-y:auto;padding:0;display:flex;flex-direction:column;box-shadow:-6px 0 40px rgba(0,0,0,.18);">
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 28px;border-bottom:1px solid #e2e8f0;">
-      <span style="font-size:13px;color:#64748b;">← <a href="#" onclick="closeProduct();return false;" style="color:#1565c0;text-decoration:none;font-weight:600;">Späť na produkty</a></span>
-      <button onclick="closeProduct()" style="background:#f5f7fa;border:none;width:38px;height:38px;border-radius:8px;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;">✕</button>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;flex:1;min-height:0;">
-      <div id="pdImg" style="height:100%;min-height:320px;display:flex;align-items:center;justify-content:center;background:#e8f0fe;"></div>
-      <div style="padding:32px;display:flex;flex-direction:column;overflow-y:auto;">
-        <span id="pdBadge" class="product-badge" style="align-self:flex-start;margin-bottom:14px;"></span>
-        <h2 id="pdName" style="font-size:26px;font-weight:800;color:#0f2d52;margin-bottom:16px;"></h2>
-        <p id="pdDesc" style="font-size:16px;color:#64748b;line-height:1.7;margin-bottom:28px;flex:1;"></p>
-        <div style="background:#f5f7fa;border-radius:10px;padding:16px;margin-bottom:24px;">
-          <div style="font-size:13px;color:#64748b;margin-bottom:4px;">Cena</div>
-          <div id="pdPrice" style="font-size:28px;font-weight:800;color:#0f2d52;"></div>
-        </div>
-        <button id="pdBtn" class="btn-primary" style="width:100%;justify-content:center;font-size:18px;padding:18px;">
-          🛒 Do košíka
-        </button>
-        <a id="pdInquiry" href="#kontakt" onclick="closeProduct()" class="btn-add" style="display:none;text-decoration:none;width:100%;justify-content:center;margin-top:0;font-size:17px;padding:16px;border-radius:10px;">
-          ✉️ Poslať dopyt
-        </a>
-        <p style="font-size:13px;color:#94a3b8;text-align:center;margin-top:14px;">Máte otázku? Zavolajte <strong>+421 911 610 777</strong></p>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- CART OVERLAY -->
 <div class="cart-overlay" id="cartOverlay" onclick="handleOverlayClick(event)">
@@ -505,27 +526,39 @@
 
 <script>
 const products = [
-  { id:1, cat:'auto', name:'Chladivo R1234yf', badge:'badge-auto', badgeLabel:'Auto klimatizácia', icon:'🚗', desc:'Pre nové vozidlá (2013+). Opteon YF – nízky GWP. 1 kg náplň.', price:48, unit:'ks' },
-
-  { id:2, cat:'auto', name:'Chladivo R134a',   badge:'badge-auto', badgeLabel:'Auto klimatizácia', icon:'🚗', img:'R-134A.PNG', desc:'Štandardné chladivo pre staršie vozidlá. 1 kg náplň.', price:18, unit:'ks' },
-  { id:3, cat:'hvac', name:'Chladivo R32',      badge:'badge-hvac', badgeLabel:'Klimatizácia', icon:'❄️', img:'R-32.PNG', desc:'Moderné chladivo pre split klimatizácie a tepelné čerpadlá. Fľaša 10 kg.', price:65, unit:'fľaša' },
-  { id:4, cat:'hvac', name:'Chladivo R410A',    badge:'badge-hvac', badgeLabel:'Klimatizácia', icon:'❄️', img:'R-410A.PNG', desc:'Najpoužívanejšie chladivo pre klimatizácie. Fľaša 11,3 kg.', price:72, unit:'fľaša' },
-  { id:5, cat:'hvac', name:'Chladivo R407C',    badge:'badge-hvac', badgeLabel:'Klimatizácia', icon:'❄️', img:'R-407C.PNG', desc:'Zmes pre klimatizačné zariadenia. Fľaša 11,3 kg.', price:68, unit:'fľaša' },
-  { id:6, cat:'hvac', name:'Chladivo R404A',    badge:'badge-hvac', badgeLabel:'Chladenie potravín', icon:'🥩', desc:'Pre priemyselné chladenie potravín a prepravné chladenie. Fľaša 10 kg.', price:95, unit:'fľaša' },
-  { id:7, cat:'hvac', name:'Chladivo R452A',    badge:'badge-hvac', badgeLabel:'Klimatizácia', icon:'❄️', img:'R-452A.PNG', desc:'Moderná náhrada R404A. Nízky GWP. Fľaša 10 kg.', price:89, unit:'fľaša' },
-  { id:8, cat:'hvac', name:'Chladivo R744 (CO₂)',badge:'badge-hvac', badgeLabel:'Priemysel', icon:'🏭', desc:'CO₂ chladivo pre transkritické systémy. Fľaša 50 kg.', price:85, unit:'fľaša' },
-  { id:9,  cat:'cryo', name:'Kvapalný dusík 10L', badge:'badge-cryo', badgeLabel:'Kryokvapalina', icon:'🧊', desc:'Pre kožné ambulancie, laboratóriá a výskum. Dewarova nádoba 10 l.', price:35, unit:'nádoba' },
-  { id:10, cat:'cryo', name:'Kvapalný dusík 30L', badge:'badge-cryo', badgeLabel:'Kryokvapalina', icon:'🧊', desc:'Väčší objem pre náročnejšie pracoviská. Dewarova nádoba 30 l.', price:85, unit:'nádoba' },
-  { id:11, cat:'cryo', name:'Kvapalné hélium LHe', badge:'badge-cryo', badgeLabel:'Kryokvapalina', icon:'⚛️', desc:'Pre MRI prístroje a výskumné inštitúcie. Individuálna cenová ponuka.', price:null, unit:'l' },
+  { id:1,  cat:'auto', name:'Chladivo R1234yf',    badge:'badge-auto', badgeLabel:'Auto klimatizácia',   icon:'🚗', desc:'Pre nové vozidlá (2013+). Opteon YF – nízky GWP. 1 kg náplň.', price:48, unit:'ks' },
+  { id:2,  cat:'auto', name:'Chladivo R134a',       badge:'badge-auto', badgeLabel:'Auto klimatizácia',   icon:'🚗', img:'R-134A.PNG', desc:'Štandardné chladivo pre staršie vozidlá. 1 kg náplň.', price:18, unit:'ks' },
+  { id:3,  cat:'hvac', name:'Chladivo R32',          badge:'badge-hvac', badgeLabel:'Klimatizácia',        icon:'❄️', img:'R-32.PNG', desc:'Moderné chladivo pre split klimatizácie a tepelné čerpadlá. Fľaša 10 kg.', price:65, unit:'fľaša' },
+  { id:4,  cat:'hvac', name:'Chladivo R410A',        badge:'badge-hvac', badgeLabel:'Klimatizácia',        icon:'❄️', img:'R-410A.PNG', desc:'Najpoužívanejšie chladivo pre klimatizácie. Fľaša 11,3 kg.', price:72, unit:'fľaša' },
+  { id:5,  cat:'hvac', name:'Chladivo R407C',        badge:'badge-hvac', badgeLabel:'Klimatizácia',        icon:'❄️', img:'R-407C.PNG', desc:'Zmes pre klimatizačné zariadenia. Fľaša 11,3 kg.', price:68, unit:'fľaša' },
+  { id:6,  cat:'hvac', name:'Chladivo R404A',        badge:'badge-hvac', badgeLabel:'Chladenie potravín', icon:'🥩', desc:'Pre priemyselné chladenie potravín a prepravné chladenie. Fľaša 10 kg.', price:95, unit:'fľaša' },
+  { id:7,  cat:'hvac', name:'Chladivo R452A',        badge:'badge-hvac', badgeLabel:'Klimatizácia',        icon:'❄️', img:'R-452A.PNG', desc:'Moderná náhrada R404A. Nízky GWP. Fľaša 10 kg.', price:89, unit:'fľaša' },
+  { id:8,  cat:'hvac', name:'Chladivo R744 (CO₂)',   badge:'badge-hvac', badgeLabel:'Priemysel',           icon:'🏭', desc:'CO₂ chladivo pre transkritické systémy. Fľaša 50 kg.', price:85, unit:'fľaša' },
+  { id:9,  cat:'cryo', name:'Kvapalný dusík 10L',    badge:'badge-cryo', badgeLabel:'Kryokvapalina',       icon:'🧊', desc:'Pre kožné ambulancie, laboratóriá a výskum. Dewarova nádoba 10 l.', price:35, unit:'nádoba' },
+  { id:10, cat:'cryo', name:'Kvapalný dusík 30L',    badge:'badge-cryo', badgeLabel:'Kryokvapalina',       icon:'🧊', desc:'Väčší objem pre náročnejšie pracoviská. Dewarova nádoba 30 l.', price:85, unit:'nádoba' },
+  { id:11, cat:'cryo', name:'Kvapalné hélium LHe',   badge:'badge-cryo', badgeLabel:'Kryokvapalina',       icon:'⚛️', desc:'Pre MRI prístroje a výskumné inštitúcie. Individuálna cenová ponuka.', price:null, unit:'l' },
 ];
 
 let cart = {};
 
+/* ── localStorage ── */
+function saveCart() {
+  try { localStorage.setItem('cryochem_cart', JSON.stringify(cart)); } catch(e) {}
+}
+function loadCart() {
+  try {
+    const saved = localStorage.getItem('cryochem_cart');
+    if (saved) cart = JSON.parse(saved);
+  } catch(e) {}
+  updateCartBadge();
+}
+
+/* ── Render products ── */
 function renderProducts(filter = 'all') {
   const grid = document.getElementById('productsGrid');
   const list = filter === 'all' ? products : products.filter(p => p.cat === filter);
   grid.innerHTML = list.map(p => `
-    <div class="product-card" onclick="openProduct(${p.id})" style="cursor:pointer;">
+    <div class="product-card" onclick="window.location.href='product.html?id=${p.id}'" style="cursor:pointer;">
       <div class="product-img" style="${p.img ? 'background:#e8f0fe;padding:0;' : ''}">
         ${p.img ? `<img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:contain;padding:12px;">` : p.icon}
       </div>
@@ -548,37 +581,6 @@ function renderProducts(filter = 'all') {
   `).join('');
 }
 
-function openProduct(id) {
-  const p = products.find(x => x.id === id);
-  if (!p) return;
-  document.getElementById('pdImg').innerHTML = p.img
-    ? `<img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:contain;padding:24px;">`
-    : `<span style="font-size:80px;">${p.icon}</span>`;
-  document.getElementById('pdImg').style.background = '#e8f0fe';
-  document.getElementById('pdBadge').className = 'product-badge ' + p.badge;
-  document.getElementById('pdBadge').textContent = p.badgeLabel;
-  document.getElementById('pdName').textContent = p.name;
-  document.getElementById('pdDesc').textContent = p.desc;
-  document.getElementById('pdPrice').innerHTML = p.price
-    ? `${p.price} € <small style="font-size:15px;font-weight:400;color:var(--text-muted)">/ ${p.unit} (bez DPH)</small>`
-    : '<span style="font-size:16px;color:var(--blue)">Cena na dopyt</span>';
-  const btn = document.getElementById('pdBtn');
-  if (p.price) {
-    btn.style.display = 'flex';
-    btn.onclick = () => { addToCart(p.id); closeProduct(); };
-  } else {
-    btn.style.display = 'none';
-  }
-  document.getElementById('pdInquiry').style.display = p.price ? 'none' : 'flex';
-  document.getElementById('productModal').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeProduct() {
-  document.getElementById('productModal').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
 function filterTab(tab) {
   document.querySelectorAll('.tab-btn').forEach((b, i) => {
     b.classList.toggle('active', ['all','auto','hvac','cryo'][i] === tab);
@@ -587,10 +589,12 @@ function filterTab(tab) {
   document.getElementById('produkty').scrollIntoView({ behavior: 'smooth' });
 }
 
+/* ── Cart logic ── */
 function addToCart(id) {
   const p = products.find(x => x.id === id);
   if (!p) return;
   cart[id] = cart[id] ? { ...cart[id], qty: cart[id].qty + 1 } : { ...p, qty: 1 };
+  saveCart();
   updateCartBadge();
   const btn = document.getElementById(`btn-${id}`);
   if (btn) {
@@ -620,9 +624,6 @@ function closeCart() {
 }
 function handleOverlayClick(e) {
   if (e.target === document.getElementById('cartOverlay')) closeCart();
-}
-function handleProductOverlayClick(e) {
-  if (e.target === document.getElementById('productModal')) closeProduct();
 }
 
 function renderCart() {
@@ -663,11 +664,13 @@ function changeQty(id, delta) {
   if (!cart[id]) return;
   cart[id].qty += delta;
   if (cart[id].qty <= 0) delete cart[id];
+  saveCart();
   updateCartBadge();
   renderCart();
 }
 function removeItem(id) {
   delete cart[id];
+  saveCart();
   updateCartBadge();
   renderCart();
 }
@@ -712,7 +715,21 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2800);
 }
 
-renderProducts();
+/* Check if redirected back from product page with item to add */
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  const addId = parseInt(params.get('add'));
+  if (addId) {
+    history.replaceState(null, '', window.location.pathname + window.location.hash);
+    loadCart();
+    renderProducts();
+    addToCart(addId);
+    setTimeout(() => openCart(), 300);
+  } else {
+    loadCart();
+    renderProducts();
+  }
+})();
 </script>
 </body>
 </html>
