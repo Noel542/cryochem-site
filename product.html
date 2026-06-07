@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">Produkt – Cryochem Slovakia</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue-dark: #0f2d52;
+    --blue:      #1565c0;
+    --blue-light:#e8f0fe;
+    --accent:    #ff6b00;
+    --accent-hover:#e55f00;
+    --gray-bg:   #f5f7fa;
+    --gray-line: #e2e8f0;
+    --text:      #1a202c;
+    --text-muted:#64748b;
+    --white:     #ffffff;
+    --success:   #16a34a;
+    --shadow:    0 4px 24px rgba(0,0,0,.10);
+    --radius:    14px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; font-size: 17px; color: var(--text); background: var(--white); line-height: 1.6; }
+
+  /* TOPBAR */
+  .topbar { background: var(--blue-dark); color: #c9d8f0; font-size: 14px; padding: 8px 0; }
+  .topbar .inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; }
+  .topbar a { color: #c9d8f0; text-decoration: none; }
+  .topbar a:hover { color: #fff; }
+  .topbar .contact-links { display: flex; gap: 24px; }
+
+  /* HEADER */
+  header { background: var(--white); border-bottom: 2px solid var(--gray-line); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,.07); }
+  .header-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 24px; }
+  .logo { font-size: 24px; font-weight: 800; color: var(--blue-dark); text-decoration: none; white-space: nowrap; }
+  .logo span { color: var(--blue); }
+  nav { display: flex; gap: 8px; align-items: center; }
+  nav a { text-decoration: none; color: var(--text); font-weight: 500; font-size: 15px; padding: 8px 14px; border-radius: 8px; transition: background .2s, color .2s; white-space: nowrap; }
+  nav a:hover { background: var(--blue-light); color: var(--blue); }
+  .btn-cart { background: var(--blue-dark) !important; color: #fff !important; border-radius: 10px !important; padding: 10px 18px !important; font-weight: 600 !important; display: flex; align-items: center; gap: 8px; position: relative; }
+  .btn-cart:hover { background: var(--blue) !important; }
+  .cart-badge { background: var(--accent); color: #fff; font-size: 11px; font-weight: 700; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; position: absolute; top: -6px; right: -6px; }
+
+  /* BREADCRUMB */
+  .breadcrumb { background: var(--gray-bg); border-bottom: 1px solid var(--gray-line); padding: 14px 24px; font-size: 14px; }
+  .breadcrumb .inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 8px; color: var(--text-muted); }
+  .breadcrumb a { color: var(--blue); text-decoration: none; font-weight: 500; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb .sep { color: #cbd5e1; }
+
+  /* PRODUCT PAGE */
+  .product-page { max-width: 1200px; margin: 0 auto; padding: 48px 24px 80px; }
+
+  /* Desktop: photo left, info right */
+  .product-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+
+  /* Photo block */
+  .product-photo-wrap { border-radius: 20px; overflow: hidden; background: var(--blue-light); display: flex; align-items: center; justify-content: center; min-height: 400px; }
+  .product-photo-wrap img { width: 100%; height: 100%; object-fit: contain; padding: 32px; }
+  .product-photo-emoji { font-size: 120px; display: flex; align-items: center; justify-content: center; min-height: 400px; }
+
+  /* Info block */
+  .product-info { }
+  .product-badge { display: inline-block; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 6px; margin-bottom: 16px; text-transform: uppercase; letter-spacing: .5px; }
+  .badge-auto { background: #fff3cd; color: #856404; }
+  .badge-hvac { background: #d1e7dd; color: #0a3622; }
+  .badge-cryo { background: #cff4fc; color: #055160; }
+  .product-info h1 { font-size: 36px; font-weight: 800; color: var(--blue-dark); margin-bottom: 16px; line-height: 1.2; }
+  .product-info .product-desc-full { font-size: 17px; color: var(--text-muted); line-height: 1.8; margin-bottom: 32px; }
+
+  /* Price box */
+  .price-box { background: var(--gray-bg); border-radius: 14px; padding: 24px 28px; margin-bottom: 28px; }
+  .price-label { font-size: 13px; color: var(--text-muted); margin-bottom: 6px; font-weight: 500; }
+  .price-value { font-size: 40px; font-weight: 800; color: var(--blue-dark); line-height: 1; }
+  .price-unit { font-size: 16px; font-weight: 400; color: var(--text-muted); margin-top: 4px; }
+  .price-vat { font-size: 13px; color: var(--text-muted); margin-top: 8px; }
+
+  /* Quantity selector */
+  .qty-selector { display: flex; align-items: center; gap: 20px; margin-bottom: 20px; }
+  .qty-label { font-size: 16px; font-weight: 600; color: var(--blue-dark); white-space: nowrap; }
+  .qty-controls { display: flex; align-items: center; border: 2px solid var(--gray-line); border-radius: 12px; overflow: hidden; }
+  .qty-btn-lg { width: 52px; height: 52px; background: var(--gray-bg); border: none; cursor: pointer; font-size: 24px; font-weight: 700; color: var(--blue-dark); transition: background .15s; display: flex; align-items: center; justify-content: center; }
+  .qty-btn-lg:hover { background: var(--blue-light); color: var(--blue); }
+  .qty-display { min-width: 60px; text-align: center; font-size: 22px; font-weight: 800; color: var(--blue-dark); padding: 0 8px; }
+
+  /* Buttons */
+  .btn-add-big { width: 100%; background: var(--accent); color: #fff; border: none; border-radius: 12px; padding: 20px; font-size: 20px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: background .2s, transform .1s; margin-bottom: 14px; }
+  .btn-add-big:hover { background: var(--accent-hover); transform: translateY(-2px); }
+  .btn-add-big.added { background: var(--success); }
+  .btn-inquiry { width: 100%; background: transparent; color: var(--blue); border: 2px solid var(--blue); border-radius: 12px; padding: 16px; font-size: 17px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all .2s; text-decoration: none; margin-bottom: 14px; }
+  .btn-inquiry:hover { background: var(--blue-light); }
+  .btn-back { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); font-size: 15px; font-weight: 500; text-decoration: none; padding: 10px 0; transition: color .2s; }
+  .btn-back:hover { color: var(--blue-dark); }
+
+  /* Features list */
+  .product-features { margin-top: 24px; border-top: 1px solid var(--gray-line); padding-top: 24px; }
+  .product-features h3 { font-size: 15px; font-weight: 700; color: var(--blue-dark); margin-bottom: 14px; text-transform: uppercase; letter-spacing: .5px; }
+  .feature-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; font-size: 15px; color: var(--text-muted); }
+  .feature-item::before { content: '✓'; color: var(--success); font-weight: 700; font-size: 16px; flex-shrink: 0; }
+
+  /* Contact note */
+  .contact-note { margin-top: 18px; text-align: center; font-size: 14px; color: var(--text-muted); }
+  .contact-note a { color: var(--blue); font-weight: 600; text-decoration: none; }
+
+  /* NOT FOUND */
+  .not-found { text-align: center; padding: 80px 24px; }
+  .not-found h1 { font-size: 28px; font-weight: 800; color: var(--blue-dark); margin-bottom: 12px; }
+  .not-found p { color: var(--text-muted); margin-bottom: 28px; }
+
+  /* CART OVERLAY */
+  .cart-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 200; display: none; justify-content: flex-end; }
+  .cart-overlay.open { display: flex; }
+  .cart-panel { background: #fff; width: 420px; max-width: 100vw; height: 100vh; overflow-y: auto; padding: 28px; display: flex; flex-direction: column; box-shadow: -6px 0 40px rgba(0,0,0,.18); }
+  .cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
+  .cart-header h2 { font-size: 22px; font-weight: 700; }
+  .cart-close { background: var(--gray-bg); border: none; width: 38px; height: 38px; border-radius: 8px; cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; }
+  .cart-items { flex: 1; }
+  .cart-empty { text-align: center; color: var(--text-muted); padding: 48px 0; font-size: 17px; }
+  .cart-item { display: flex; gap: 14px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--gray-line); }
+  .cart-item-icon { font-size: 32px; width: 50px; text-align: center; }
+  .cart-item-info { flex: 1; }
+  .cart-item-info strong { display: block; font-weight: 600; font-size: 15px; }
+  .cart-item-info span  { font-size: 13px; color: var(--text-muted); }
+  .cart-item-price { font-weight: 700; font-size: 16px; white-space: nowrap; }
+  .cart-qty { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+  .qty-btn { width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--gray-line); background: var(--gray-bg); cursor: pointer; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .qty-num { font-weight: 600; font-size: 15px; min-width: 20px; text-align: center; }
+  .cart-footer { padding-top: 24px; }
+  .cart-total { display: flex; justify-content: space-between; font-size: 16px; color: var(--text-muted); margin-bottom: 4px; }
+  .cart-total-vat { display: flex; justify-content: space-between; font-size: 20px; font-weight: 800; color: var(--blue-dark); margin-bottom: 6px; }
+  .cart-vat-note { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
+  .btn-checkout { width: 100%; background: var(--accent); color: #fff; border: none; border-radius: 10px; padding: 18px; font-size: 18px; font-weight: 700; cursor: pointer; transition: background .2s, opacity .2s; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .btn-checkout:hover:not(:disabled) { background: var(--accent-hover); }
+  .btn-checkout:disabled { opacity: .65; cursor: not-allowed; }
+  .btn-continue { width: 100%; background: transparent; color: var(--blue); border: 2px solid var(--blue); border-radius: 10px; padding: 12px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all .2s; }
+  .btn-continue:hover { background: var(--blue-light); }
+  .stripe-note { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 12px; color: var(--text-muted); margin-top: 12px; }
+
+  /* TOAST */
+  .toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%); background: var(--blue-dark); color: #fff; padding: 14px 24px; border-radius: 10px; font-size: 15px; font-weight: 600; box-shadow: 0 6px 24px rgba(0,0,0,.3); z-index: 999; opacity: 0; transition: opacity .3s; pointer-events: none; white-space: nowrap; }
+  .toast.show { opacity: 1; }
+
+  /* FOOTER */
+  footer { background: var(--blue-dark); color: #8baed4; padding: 40px 24px 28px; }
+  .footer-bottom { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 13px; }
+  .footer-bottom p { color: #6a8fb5; }
+
+  /* MOBILE: photo on top, info below */
+  @media (max-width: 768px) {
+    .product-layout {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    .product-photo-wrap { min-height: 280px; }
+    .product-photo-emoji { min-height: 280px; font-size: 90px; }
+    .product-info h1 { font-size: 26px; }
+    .price-value { font-size: 32px; }
+    .btn-add-big { font-size: 17px; padding: 17px; }
+    nav a:not(.btn-cart) { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="inner">
+    <span>🇸🇰 Cryochem Slovakia s.r.o. – Poprad</span>
+    <div class="contact-links">
+      <span>📞 <a href="tel:+421911610777">+421 911 610 777</a></span>
+      <span>✉️ <a href="mailto:info@cryochem.sk">info@cryochem.sk</a></span>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a class="logo" href="index.html"><span>Cryo</span>chem <span style="font-size:14px;font-weight:500;color:#64748b">Slovakia</span></a>
+    <nav>
+      <a href="index.html#o-nas">O nás</a>
+      <a href="index.html#produkty">Produkty</a>
+      <a href="index.html#ako-objednat">Ako objednať</a>
+      <a href="index.html#kontakt">Kontakt</a>
+      <a href="#" class="btn-cart" onclick="openCart(); return false;">
+        🛒 Košík
+        <span class="cart-badge" id="cartBadge" style="display:none">0</span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <div class="inner">
+    <a href="index.html">Domov</a>
+    <span class="sep">›</span>
+    <a href="index.html#produkty">Produkty</a>
+    <span class="sep">›</span>
+    <span id="breadcrumbName">Produkt</span>
+  </div>
+</div>
+
+<!-- PRODUCT DETAIL -->
+<div class="product-page" id="productPage">
+  <div class="product-layout">
+    <!-- Photo (top on mobile, left on desktop) -->
+    <div id="photoBlock"></div>
+
+    <!-- Info (bottom on mobile, right on desktop) -->
+    <div class="product-info" id="infoBlock">
+      <div id="loadingMsg" style="color:var(--text-muted);font-size:17px;">Načítavam produkt...</div>
+    </div>
+  </div>
+</div>
+
+<!-- CART OVERLAY -->
+<div class="cart-overlay" id="cartOverlay" onclick="handleOverlayClick(event)">
+  <div class="cart-panel">
+    <div class="cart-header">
+      <h2>🛒 Váš košík</h2>
+      <button class="cart-close" onclick="closeCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer" id="cartFooter" style="display:none">
+      <div class="cart-total"><span>Bez DPH:</span><span id="cartSubtotal">0 €</span></div>
+      <div class="cart-total-vat"><span>Celkom s DPH (20%):</span><span id="cartTotal">0 €</span></div>
+      <div class="cart-vat-note">Cena vrátane 20% DPH</div>
+      <button class="btn-checkout" id="checkoutBtn" onclick="openCheckout()">
+        🔒 Zaplatiť bezpečne →
+      </button>
+      <button class="btn-continue" onclick="closeCart()">← Pokračovať v nákupe</button>
+      <div class="stripe-note">
+        <svg width="40" height="16" viewBox="0 0 40 16" fill="none" xmlns="http://www.w3.org/2000/svg"><text x="0" y="13" font-size="11" fill="#94a3b8" font-family="Arial">Stripe</text></svg>
+        Platba zabezpečená cez Stripe
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-bottom">
+    <p>© 2026 Cryochem Slovakia s.r.o. Všetky práva vyhradené.</p>
+    <p>Teplická 3984/4, 051 01 Poprad &nbsp;|&nbsp; <a href="tel:+421911610777" style="color:#6a8fb5">+421 911 610 777</a></p>
+  </div>
+</footer>
+
+<script>
+const products = [
+  { id:1,  cat:'auto', name:'Chladivo R1234yf',    badge:'badge-auto', badgeLabel:'Auto klimatizácia',   icon:'🚗', desc:'Pre nové vozidlá (2013+). Opteon YF – nízky GWP. 1 kg náplň.', price:48, unit:'ks',
+    features:['Nízky GWP – šetrí životné prostredie','Certifikované podľa EU F-Gas nariadení','Pre vozidlá vyrobené od roku 2013','Objem: 1 kg náplň'] },
+  { id:2,  cat:'auto', name:'Chladivo R134a',       badge:'badge-auto', badgeLabel:'Auto klimatizácia',   icon:'🚗', img:'R-134A.PNG', desc:'Štandardné chladivo pre staršie vozidlá. 1 kg náplň.', price:18, unit:'ks',
+    features:['Pre vozidlá do roku 2013','Štandardný priemyselný formát','1 kg náplň','Certifikovaná kvalita'] },
+  { id:3,  cat:'hvac', name:'Chladivo R32',          badge:'badge-hvac', badgeLabel:'Klimatizácia',        icon:'❄️', img:'R-32.PNG', desc:'Moderné chladivo pre split klimatizácie a tepelné čerpadlá. Fľaša 10 kg.', price:65, unit:'fľaša',
+    features:['Nízky GWP (675)','Pre split klimatizácie a tepelné čerpadlá','Vyššia energetická účinnosť','Fľaša 10 kg'] },
+  { id:4,  cat:'hvac', name:'Chladivo R410A',        badge:'badge-hvac', badgeLabel:'Klimatizácia',        icon:'❄️', img:'R-410A.PNG', desc:'Najpoužívanejšie chladivo pre klimatizácie. Fľaša 11,3 kg.', price:72, unit:'fľaša',
+    features:['Najrozšírenejšie HVAC chladivo','Pre klimatizačné systémy','Bez obsahu chlóru','Fľaša 11,3 kg'] },
+  { id:5,  cat:'hvac', name:'Chladivo R407C',        badge:'badge-hvac', badgeLabel:'Klimatizácia',        icon:'❄️', img:'R-407C.PNG', desc:'Zmes pre klimatizačné zariadenia. Fľaša 11,3 kg.', price:68, unit:'fľaša',
+    features:['Zmes R32/R125/R134a','Pre strednotlakové systémy','Vhodné pre staršie klimatizácie','Fľaša 11,3 kg'] },
+  { id:6,  cat:'hvac', name:'Chladivo R404A',        badge:'badge-hvac', badgeLabel:'Chladenie potravín', icon:'🥩', desc:'Pre priemyselné chladenie potravín a prepravné chladenie. Fľaša 10 kg.', price:95, unit:'fľaša',
+    features:['Pre priemyselné chladenie','Chladenie potravín a nápojov','Prepravné chladenie','Fľaša 10 kg'] },
+  { id:7,  cat:'hvac', name:'Chladivo R452A',        badge:'badge-hvac', badgeLabel:'Klimatizácia',        icon:'❄️', img:'R-452A.PNG', desc:'Moderná náhrada R404A. Nízky GWP. Fľaša 10 kg.', price:89, unit:'fľaša',
+    features:['Náhrada R404A s nižším GWP','Nízky GWP (2140)','Priemyselné chladenie','Fľaša 10 kg'] },
+  { id:8,  cat:'hvac', name:'Chladivo R744 (CO₂)',   badge:'badge-hvac', badgeLabel:'Priemysel',           icon:'🏭', desc:'CO₂ chladivo pre transkritické systémy. Fľaša 50 kg.', price:85, unit:'fľaša',
+    features:['Prírodné chladivo – CO₂','GWP = 1 (najnižší možný)','Pre transkritické systémy','Fľaša 50 kg'] },
+  { id:9,  cat:'cryo', name:'Kvapalný dusík 10L',    badge:'badge-cryo', badgeLabel:'Kryokvapalina',       icon:'🧊', desc:'Pre kožné ambulancie, laboratóriá a výskum. Dewarova nádoba 10 l.', price:35, unit:'nádoba',
+    features:['Pre kožné ambulancie a dermatológiu','Laboratórne použitie','Dewarova nádoba 10 l','Teplota: −196 °C'] },
+  { id:10, cat:'cryo', name:'Kvapalný dusík 30L',    badge:'badge-cryo', badgeLabel:'Kryokvapalina',       icon:'🧊', desc:'Väčší objem pre náročnejšie pracoviská. Dewarova nádoba 30 l.', price:85, unit:'nádoba',
+    features:['Pre nemocnice a výskumné ústavy','Väčší objem pre intenzívne použitie','Dewarova nádoba 30 l','Teplota: −196 °C'] },
+  { id:11, cat:'cryo', name:'Kvapalné hélium LHe',   badge:'badge-cryo', badgeLabel:'Kryokvapalina',       icon:'⚛️', desc:'Pre MRI prístroje a výskumné inštitúcie. Individuálna cenová ponuka.', price:null, unit:'l',
+    features:['Pre MRI prístroje a supravodivé magnety','Výskumné inštitúcie a univerzity','Teplota: −269 °C','Cena podľa množstva a dostupnosti'] },
+];
+
+let cart = {};
+let pageQty = 1;
+
+function changePageQty(delta) {
+  pageQty = Math.max(1, pageQty + delta);
+  const el = document.getElementById('pageQtyDisplay');
+  if (el) el.textContent = pageQty;
+}
+
+/* ── localStorage ── */
+function saveCart() {
+  try { localStorage.setItem('cryochem_cart', JSON.stringify(cart)); } catch(e) {}
+}
+function loadCart() {
+  try {
+    const saved = localStorage.getItem('cryochem_cart');
+    if (saved) cart = JSON.parse(saved);
+  } catch(e) {}
+  updateCartBadge();
+}
+
+/* ── Render product detail ── */
+function renderProduct() {
+  const params = new URLSearchParams(window.location.search);
+  const id = parseInt(params.get('id'));
+  const p = products.find(x => x.id === id);
+
+  if (!p) {
+    document.getElementById('loadingMsg').innerHTML = '';
+    document.getElementById('photoBlock').innerHTML = '';
+    document.getElementById('infoBlock').innerHTML = `
+      <div class="not-found">
+        <div style="font-size:64px;margin-bottom:20px;">❓</div>
+        <h1>Produkt nenájdený</h1>
+        <p>Tento produkt neexistuje alebo bol odstránený.</p>
+        <a href="index.html#produkty" class="btn-add-big" style="max-width:280px;text-decoration:none;">← Späť na produkty</a>
+      </div>`;
+    return;
+  }
+
+  // Update page title and breadcrumb
+  document.title = p.name + ' – Cryochem Slovakia';
+  document.getElementById('breadcrumbName').textContent = p.name;
+
+  // Photo block
+  document.getElementById('photoBlock').innerHTML = p.img
+    ? `<div class="product-photo-wrap"><img src="${p.img}" alt="${p.name}"></div>`
+    : `<div class="product-photo-wrap product-photo-emoji">${p.icon}</div>`;
+
+  // Features list
+  const featuresList = (p.features || []).map(f => `<div class="feature-item">${f}</div>`).join('');
+
+  // Price block
+  const priceBlock = p.price
+    ? `<div class="price-box">
+        <div class="price-label">Cena</div>
+        <div class="price-value">${p.price} €</div>
+        <div class="price-unit">za ${p.unit}</div>
+        <div class="price-vat">Cena bez DPH · s 20% DPH: <strong>${(p.price * 1.2).toFixed(2)} €</strong></div>
+      </div>`
+    : `<div class="price-box">
+        <div class="price-label">Cena</div>
+        <div class="price-value" style="font-size:22px;color:var(--blue);">Cena na individuálny dopyt</div>
+        <div class="price-vat" style="margin-top:8px;">Cena závisí od množstva a dostupnosti. Kontaktujte nás.</div>
+      </div>`;
+
+  // Quantity selector + action button
+  const actionBtn = p.price
+    ? `<div class="qty-selector">
+        <span class="qty-label">Množstvo:</span>
+        <div class="qty-controls">
+          <button class="qty-btn-lg" onclick="changePageQty(-1)">−</button>
+          <span class="qty-display" id="pageQtyDisplay">1</span>
+          <button class="qty-btn-lg" onclick="changePageQty(1)">+</button>
+        </div>
+      </div>
+      <button class="btn-add-big" id="addBtn" onclick="addToCart(${p.id})">🛒 Pridať do košíka</button>`
+    : `<a href="index.html#kontakt" class="btn-inquiry">✉️ Poslať dopyt o cene</a>`;
+
+  // Info block
+  document.getElementById('infoBlock').innerHTML = `
+    <span class="product-badge ${p.badge}">${p.badgeLabel}</span>
+    <h1>${p.name}</h1>
+    <p class="product-desc-full">${p.desc}</p>
+    ${priceBlock}
+    ${actionBtn}
+    <a href="index.html#produkty" class="btn-back">← Späť na všetky produkty</a>
+    ${featuresList.length ? `<div class="product-features"><h3>Vlastnosti produktu</h3>${featuresList}</div>` : ''}
+    <div class="contact-note">
+      Otázky? Zavolajte <a href="tel:+421911610777">+421 911 610 777</a> alebo napíšte na <a href="mailto:info@cryochem.sk">info@cryochem.sk</a>
+    </div>
+  `;
+}
+
+/* ── Cart logic ── */
+function addToCart(id) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+  const qty = pageQty || 1;
+  cart[id] = cart[id] ? { ...cart[id], qty: cart[id].qty + qty } : { ...p, qty };
+  saveCart();
+  updateCartBadge();
+
+  const btn = document.getElementById('addBtn');
+  if (btn) {
+    btn.innerHTML = `✓ Pridané ${qty > 1 ? '(' + qty + ' ks)' : ''}!`;
+    btn.classList.add('added');
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.innerHTML = '🛒 Pridať do košíka';
+      btn.classList.remove('added');
+      btn.disabled = false;
+    }, 1800);
+  }
+  showToast(`✓ ${qty}× ${p.name} pridané do košíka`);
+  setTimeout(() => openCart(), 600);
+}
+
+function updateCartBadge() {
+  const total = Object.values(cart).reduce((s, i) => s + i.qty, 0);
+  const badge = document.getElementById('cartBadge');
+  badge.textContent = total;
+  badge.style.display = total > 0 ? 'flex' : 'none';
+}
+
+function openCart() {
+  renderCart();
+  document.getElementById('cartOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeCart() {
+  document.getElementById('cartOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('cartOverlay')) closeCart();
+}
+
+function renderCart() {
+  const items = Object.values(cart);
+  const container = document.getElementById('cartItems');
+  const footer    = document.getElementById('cartFooter');
+  if (!items.length) {
+    container.innerHTML = '<div class="cart-empty">🛒<br><br>Váš košík je prázdny.<br>Pridajte produkty a objednajte.</div>';
+    footer.style.display = 'none';
+    return;
+  }
+  container.innerHTML = items.map(item => `
+    <div class="cart-item">
+      <div class="cart-item-icon">${item.icon}</div>
+      <div class="cart-item-info">
+        <strong>${item.name}</strong>
+        <span>${item.price} € / ${item.unit}</span>
+        <div class="cart-qty">
+          <button class="qty-btn" onclick="changeQty(${item.id}, -1)">−</button>
+          <span class="qty-num">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${item.id}, 1)">+</button>
+        </div>
+      </div>
+      <div>
+        <div class="cart-item-price">${(item.price * item.qty).toFixed(2)} €</div>
+        <button onclick="removeItem(${item.id})" style="margin-top:6px;background:none;border:none;color:#f87171;cursor:pointer;font-size:13px;">Odstrániť</button>
+      </div>
+    </div>
+  `).join('');
+  const subtotal = items.reduce((s, i) => s + i.price * i.qty, 0);
+  const total    = subtotal * 1.2;
+  document.getElementById('cartSubtotal').textContent = subtotal.toFixed(2) + ' €';
+  document.getElementById('cartTotal').textContent    = total.toFixed(2) + ' €';
+  footer.style.display = 'block';
+}
+
+function changeQty(id, delta) {
+  if (!cart[id]) return;
+  cart[id].qty += delta;
+  if (cart[id].qty <= 0) delete cart[id];
+  saveCart();
+  updateCartBadge();
+  renderCart();
+}
+function removeItem(id) {
+  delete cart[id];
+  saveCart();
+  updateCartBadge();
+  renderCart();
+}
+
+async function openCheckout() {
+  const items = Object.values(cart);
+  if (!items.length) return;
+  const btn = document.getElementById('checkoutBtn');
+  btn.innerHTML = '⏳ Pripravujem platbu...';
+  btn.disabled = true;
+  try {
+    const res = await fetch('/.netlify/functions/create-checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items }),
+    });
+    if (!res.ok) throw new Error('Server error ' + res.status);
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+    window.location.href = data.url;
+  } catch (err) {
+    console.error(err);
+    showToast('⚠️ Chyba platby. Skúste znova alebo zavolajte +421 911 610 777');
+    btn.innerHTML = '🔒 Zaplatiť bezpečne →';
+    btn.disabled = false;
+  }
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+/* Init */
+loadCart();
+renderProduct();
+</script>
+</body>
+</html>
