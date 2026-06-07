@@ -448,6 +448,35 @@
   </div>
 </footer>
 
+<!-- PRODUCT DETAIL MODAL -->
+<div class="cart-overlay" id="productModal" onclick="handleProductOverlayClick(event)">
+  <div style="background:#fff;width:700px;max-width:100vw;height:100vh;overflow-y:auto;padding:0;display:flex;flex-direction:column;box-shadow:-6px 0 40px rgba(0,0,0,.18);">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 28px;border-bottom:1px solid #e2e8f0;">
+      <span style="font-size:13px;color:#64748b;">← <a href="#" onclick="closeProduct();return false;" style="color:#1565c0;text-decoration:none;font-weight:600;">Späť na produkty</a></span>
+      <button onclick="closeProduct()" style="background:#f5f7fa;border:none;width:38px;height:38px;border-radius:8px;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;">✕</button>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;flex:1;min-height:0;">
+      <div id="pdImg" style="height:100%;min-height:320px;display:flex;align-items:center;justify-content:center;background:#e8f0fe;"></div>
+      <div style="padding:32px;display:flex;flex-direction:column;overflow-y:auto;">
+        <span id="pdBadge" class="product-badge" style="align-self:flex-start;margin-bottom:14px;"></span>
+        <h2 id="pdName" style="font-size:26px;font-weight:800;color:#0f2d52;margin-bottom:16px;"></h2>
+        <p id="pdDesc" style="font-size:16px;color:#64748b;line-height:1.7;margin-bottom:28px;flex:1;"></p>
+        <div style="background:#f5f7fa;border-radius:10px;padding:16px;margin-bottom:24px;">
+          <div style="font-size:13px;color:#64748b;margin-bottom:4px;">Cena</div>
+          <div id="pdPrice" style="font-size:28px;font-weight:800;color:#0f2d52;"></div>
+        </div>
+        <button id="pdBtn" class="btn-primary" style="width:100%;justify-content:center;font-size:18px;padding:18px;">
+          🛒 Do košíka
+        </button>
+        <a id="pdInquiry" href="#kontakt" onclick="closeProduct()" class="btn-add" style="display:none;text-decoration:none;width:100%;justify-content:center;margin-top:0;font-size:17px;padding:16px;border-radius:10px;">
+          ✉️ Poslať dopyt
+        </a>
+        <p style="font-size:13px;color:#94a3b8;text-align:center;margin-top:14px;">Máte otázku? Zavolajte <strong>+421 911 610 777</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- CART OVERLAY -->
 <div class="cart-overlay" id="cartOverlay" onclick="handleOverlayClick(event)">
   <div class="cart-panel">
@@ -496,7 +525,7 @@ function renderProducts(filter = 'all') {
   const grid = document.getElementById('productsGrid');
   const list = filter === 'all' ? products : products.filter(p => p.cat === filter);
   grid.innerHTML = list.map(p => `
-    <div class="product-card">
+    <div class="product-card" onclick="openProduct(${p.id})" style="cursor:pointer;">
       <div class="product-img" style="${p.img ? 'background:#e8f0fe;padding:0;' : ''}">
         ${p.img ? `<img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:contain;padding:12px;">` : p.icon}
       </div>
@@ -511,12 +540,43 @@ function renderProducts(filter = 'all') {
               : '<small style="font-size:14px;color:var(--blue)">Cena na dopyt</small>'}
           </div>
           ${p.price
-            ? `<button class="btn-add" id="btn-${p.id}" onclick="addToCart(${p.id})">+ Do košíka</button>`
-            : `<a href="#kontakt" class="btn-add" style="text-decoration:none">✉️ Dopyt</a>`}
+            ? `<button class="btn-add" id="btn-${p.id}" onclick="event.stopPropagation(); addToCart(${p.id})">+ Do košíka</button>`
+            : `<a href="#kontakt" class="btn-add" style="text-decoration:none" onclick="event.stopPropagation()">✉️ Dopyt</a>`}
         </div>
       </div>
     </div>
   `).join('');
+}
+
+function openProduct(id) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('pdImg').innerHTML = p.img
+    ? `<img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:contain;padding:24px;">`
+    : `<span style="font-size:80px;">${p.icon}</span>`;
+  document.getElementById('pdImg').style.background = '#e8f0fe';
+  document.getElementById('pdBadge').className = 'product-badge ' + p.badge;
+  document.getElementById('pdBadge').textContent = p.badgeLabel;
+  document.getElementById('pdName').textContent = p.name;
+  document.getElementById('pdDesc').textContent = p.desc;
+  document.getElementById('pdPrice').innerHTML = p.price
+    ? `${p.price} € <small style="font-size:15px;font-weight:400;color:var(--text-muted)">/ ${p.unit} (bez DPH)</small>`
+    : '<span style="font-size:16px;color:var(--blue)">Cena na dopyt</span>';
+  const btn = document.getElementById('pdBtn');
+  if (p.price) {
+    btn.style.display = 'flex';
+    btn.onclick = () => { addToCart(p.id); closeProduct(); };
+  } else {
+    btn.style.display = 'none';
+  }
+  document.getElementById('pdInquiry').style.display = p.price ? 'none' : 'flex';
+  document.getElementById('productModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeProduct() {
+  document.getElementById('productModal').classList.remove('open');
+  document.body.style.overflow = '';
 }
 
 function filterTab(tab) {
@@ -560,6 +620,9 @@ function closeCart() {
 }
 function handleOverlayClick(e) {
   if (e.target === document.getElementById('cartOverlay')) closeCart();
+}
+function handleProductOverlayClick(e) {
+  if (e.target === document.getElementById('productModal')) closeProduct();
 }
 
 function renderCart() {
