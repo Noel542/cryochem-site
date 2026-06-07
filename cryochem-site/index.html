@@ -477,12 +477,13 @@
 <script>
 const products = [
   { id:1, cat:'auto', name:'Chladivo R1234yf', badge:'badge-auto', badgeLabel:'Auto klimatizácia', icon:'🚗', desc:'Pre nové vozidlá (2013+). Opteon YF – nízky GWP. 1 kg náplň.', price:48, unit:'ks' },
-  { id:2, cat:'auto', name:'Chladivo R134a',   badge:'badge-auto', badgeLabel:'Auto klimatizácia', icon:'🚗', desc:'Štandardné chladivo pre staršie vozidlá. 1 kg náplň.', price:18, unit:'ks' },
-  { id:3, cat:'hvac', name:'Chladivo R32',      badge:'badge-hvac', badgeLabel:'Klimatizácia', icon:'❄️', desc:'Moderné chladivo pre split klimatizácie a tepelné čerpadlá. Fľaša 10 kg.', price:65, unit:'fľaša' },
-  { id:4, cat:'hvac', name:'Chladivo R410A',    badge:'badge-hvac', badgeLabel:'Klimatizácia', icon:'❄️', desc:'Najpoužívanejšie chladivo pre klimatizácie. Fľaša 11,3 kg.', price:72, unit:'fľaša' },
-  { id:5, cat:'hvac', name:'Chladivo R407C',    badge:'badge-hvac', badgeLabel:'Klimatizácia', icon:'❄️', desc:'Zmes pre klimatizačné zariadenia. Fľaša 11,3 kg.', price:68, unit:'fľaša' },
+
+  { id:2, cat:'auto', name:'Chladivo R134a',   badge:'badge-auto', badgeLabel:'Auto klimatizácia', icon:'🚗', img:'R-134A.PNG', desc:'Štandardné chladivo pre staršie vozidlá. 1 kg náplň.', price:18, unit:'ks' },
+  { id:3, cat:'hvac', name:'Chladivo R32',      badge:'badge-hvac', badgeLabel:'Klimatizácia', icon:'❄️', img:'R-32.PNG', desc:'Moderné chladivo pre split klimatizácie a tepelné čerpadlá. Fľaša 10 kg.', price:65, unit:'fľaša' },
+  { id:4, cat:'hvac', name:'Chladivo R410A',    badge:'badge-hvac', badgeLabel:'Klimatizácia', icon:'❄️', img:'R-410A.PNG', desc:'Najpoužívanejšie chladivo pre klimatizácie. Fľaša 11,3 kg.', price:72, unit:'fľaša' },
+  { id:5, cat:'hvac', name:'Chladivo R407C',    badge:'badge-hvac', badgeLabel:'Klimatizácia', icon:'❄️', img:'R-407C.PNG', desc:'Zmes pre klimatizačné zariadenia. Fľaša 11,3 kg.', price:68, unit:'fľaša' },
   { id:6, cat:'hvac', name:'Chladivo R404A',    badge:'badge-hvac', badgeLabel:'Chladenie potravín', icon:'🥩', desc:'Pre priemyselné chladenie potravín a prepravné chladenie. Fľaša 10 kg.', price:95, unit:'fľaša' },
-  { id:7, cat:'hvac', name:'Chladivo R290',     badge:'badge-hvac', badgeLabel:'Klimatizácia', icon:'❄️', desc:'Prírodné uhľovodíkové chladivo. Nízky GWP. Fľaša 10 kg.', price:58, unit:'fľaša' },
+  { id:7, cat:'hvac', name:'Chladivo R452A',    badge:'badge-hvac', badgeLabel:'Klimatizácia', icon:'❄️', img:'R-452A.PNG', desc:'Moderná náhrada R404A. Nízky GWP. Fľaša 10 kg.', price:89, unit:'fľaša' },
   { id:8, cat:'hvac', name:'Chladivo R744 (CO₂)',badge:'badge-hvac', badgeLabel:'Priemysel', icon:'🏭', desc:'CO₂ chladivo pre transkritické systémy. Fľaša 50 kg.', price:85, unit:'fľaša' },
   { id:9,  cat:'cryo', name:'Kvapalný dusík 10L', badge:'badge-cryo', badgeLabel:'Kryokvapalina', icon:'🧊', desc:'Pre kožné ambulancie, laboratóriá a výskum. Dewarova nádoba 10 l.', price:35, unit:'nádoba' },
   { id:10, cat:'cryo', name:'Kvapalný dusík 30L', badge:'badge-cryo', badgeLabel:'Kryokvapalina', icon:'🧊', desc:'Väčší objem pre náročnejšie pracoviská. Dewarova nádoba 30 l.', price:85, unit:'nádoba' },
@@ -496,7 +497,9 @@ function renderProducts(filter = 'all') {
   const list = filter === 'all' ? products : products.filter(p => p.cat === filter);
   grid.innerHTML = list.map(p => `
     <div class="product-card">
-      <div class="product-img">${p.icon}</div>
+      <div class="product-img" style="${p.img ? 'background:#111;padding:0;' : ''}">
+        ${p.img ? `<img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:contain;padding:12px;">` : p.icon}
+      </div>
       <div class="product-body">
         <span class="product-badge ${p.badge}">${p.badgeLabel}</span>
         <div class="product-name">${p.name}</div>
