@@ -497,7 +497,7 @@ function renderProducts(filter = 'all') {
   const list = filter === 'all' ? products : products.filter(p => p.cat === filter);
   grid.innerHTML = list.map(p => `
     <div class="product-card">
-      <div class="product-img" style="${p.img ? 'background:#111;padding:0;' : ''}">
+      <div class="product-img" style="${p.img ? 'background:#e8f0fe;padding:0;' : ''}">
         ${p.img ? `<img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:contain;padding:12px;">` : p.icon}
       </div>
       <div class="product-body">
